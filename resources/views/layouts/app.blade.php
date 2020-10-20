@@ -21,7 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     
     
-<!---------- Min Oo ----------->
+<!---------- Min Oo (Required JS and CSS) ----------->
 <script type="text/javascript" src="/js/jquery/jquery-3.5.1.js"></script>	
     
 <script src="/js/jquery-ui-1.12.1/jquery-ui.js"></script>	
@@ -39,7 +39,7 @@
 
 <script type="text/javascript" src="/js/users.js"></script>
 <link href="/css/users.css" rel="stylesheet" />    
-<!---------- Min Oo ----------->
+<!--------------------- Min Oo ------------------------>
 
 </head>
 <body>

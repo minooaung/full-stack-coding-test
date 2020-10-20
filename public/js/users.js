@@ -1,10 +1,13 @@
 $(document).ready(function () {
+    
+    // Setting CSRF Token for Ajax Header
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    //alert('herere');
+    
+    // Build jQuery Data Table
     var table = $('#users_tbl').DataTable({
         //"sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>> " + "t" + "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
         "bDestroy": true,
@@ -18,10 +21,9 @@ $(document).ready(function () {
 		"sPaginationType": "full_numbers",
         "ajax": {
             "type": "GET",
-            "url": '/allusers',
-            //"url": '/application/Partners/getPartners',
+            "url": '/allusers',            
             "data": function (d){
-                //d.sta = $('#selectStatus').val();
+                
             }
         },
         "infoFiltered": "",
@@ -29,8 +31,7 @@ $(document).ready(function () {
         aLengthMenu: [
             [10, 20, 30, -1],
             [10, 20, 30, "All"]
-        ],
-        
+        ],        
         "columns": [            
             {
                 "data" : "id",
@@ -78,14 +79,15 @@ $(document).ready(function () {
                 "width" : "120px",
                 "bSearchable": false,
                 "mRender": function (data, type, row) {
-                    return '<button class="btn click" onclick="editUser('+ row.id +',\'' + row.name + '\',\'' + row.email +'\');">Edit</button><button class="btn click" onclick="deleteUser('+ row.id +');">Delete</button>';
-                    //return '<button class="btn click" onclick="editUser('+ row.id +');">Edit</button><button class="btn click" onclick="deleteUser('+ row.id +');">Delete</button>';
+                    return '<button class="btn click" onclick="editUser('+ row.id +',\'' + row.name + '\',\'' + row.email +'\');">Edit</button><button class="btn click" onclick="deleteUser('+ row.id +');">Delete</button>';                    
                 }
             }
         ]
     });
+    // Loading data for table
     table.ajax.reload();
     
+    // function to add new user
     addUser = function() {
         $("#u_name").val('');
         $("#u_email").val('');
@@ -129,6 +131,7 @@ $(document).ready(function () {
         }        
     });
     
+    // Function to edit user
     editUser = function(id, name, email) {
         $('#u_name').val(name);
         $('#u_email').val(email);
@@ -166,8 +169,20 @@ $(document).ready(function () {
         }        
     };
     
+    // Function to delete user
     deleteUser = function(id) {
         if (id) {
+            if ($("#logged_in_user_id").val() == id) {
+                $.confirm({
+                    title: 'Alert',
+                    content: 'You are not allowed to delete yourself',
+                    buttons: {                            
+                        close: function(){}
+                    }
+                });
+                return true;
+            }
+            
             $.confirm({
                 title: 'Confirm',
                 content: 'Are you sure you want to delete this user?',
@@ -208,6 +223,7 @@ $(document).ready(function () {
         }
     };
     
+    // Function to valid user input email
     validateEmail = function (email) {
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         if( !emailReg.test( email ) ) {
@@ -217,13 +233,33 @@ $(document).ready(function () {
         }
     };
     
-    function submitUser(user_id = 0) {
+    // Function to submit user data for both Create and Update
+    function submitUser(user_id) {
         var method = 'POST';
         var ajaxUrl = '/adduser';
         
         var user_name = $('#u_name').val();
         var user_email = $('#u_email').val();
         var user_is_admin = 0;
+        
+        if (user_id > 0) {            
+            if ($("#logged_in_user_id").val() != user_id && $("#logged_in_is_admin").val() == 1) {
+                $.confirm({
+                    title: 'Alert',
+                    content: 'You are not allowed to Edit other Admin user',
+                    buttons: {                            
+                        close: function(){}
+                    }
+                });
+                return true;
+            }
+            method = 'PUT';
+            ajaxUrl = '/updateuser/'+user_id;
+        } else {
+            if ($("#is_admin_checkbox").prop('checked') == true) {
+                user_is_admin = 1;
+            }
+        }
         
         var is_valid_email = validateEmail(user_email);
         
@@ -265,15 +301,6 @@ $(document).ready(function () {
             user_password = $("#u_password").val();
         }
         
-        if (user_id > 0) {
-            method = 'PUT';
-            ajaxUrl = '/updateuser/'+user_id;
-        } else {
-            if ($("#is_admin_checkbox").prop('checked') == true) {
-                user_is_admin = 1;
-            }
-        }
-        
         $.ajax({
             type: method,
             url: ajaxUrl,
@@ -292,7 +319,6 @@ $(document).ready(function () {
             },
             dataType: 'json',
             success: function(data) {
-                //console.log(data.success);
                 if (data.success === true) {
                     table.ajax.reload();
                     $("#addEditDialog").dialog("close");                    

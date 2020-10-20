@@ -2,10 +2,6 @@
 
 @section('content')
 
-
-
-
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -18,7 +14,10 @@
                         </div>
                     @endif                   
                     
-                    <!--------------------------------->
+                    <input type="hidden" id="logged_in_user_id" value="{{ $id }}">
+                    <input type="hidden" id="logged_in_is_admin" value="{{ $is_admin }}">
+                    
+                    <!--------- Creating Add Edit Dialog to manage user ----------->
                     <div id="addEditDialog" style="display:none">
                         <table>
                             <tr><td></td></tr>
@@ -53,6 +52,8 @@
                     <p>
                         <button id="addUser" class="btn click" onclick="addUser();" style="visibility: visible;">Add</button>
                     </p>
+                        
+                    <!--------- Creating User Data table ----------->
                     <table id="users_tbl" class="display projects-table table table-striped table-bordered table-hover nowrap" cellspacing="0" width="100%">
                         <thead>
                             <tr>

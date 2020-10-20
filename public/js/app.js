@@ -65792,8 +65792,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  */
 
 
-__webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js"); //require('./components/users');
-//require('./components/EditForm');
+__webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
 
 /***/ }),
 
