@@ -14,7 +14,22 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <h4>
+                        Welcome => {{ $name }}
+                        @if ($is_admin)
+                            (Admin User)
+                        @else
+                            (Employee)
+                        @endif
+                    </h4>
+                    <p>{{ __('You are logged in!') }}</p>
+                    
+                    @if ($is_admin)                        
+                        <br><br>
+                        <button onclick="location.href='/users'" type="button" style="width:250px;">Manage Users</button>
+                    @else                        
+                        <p>You are not allowed to manage users</p>
+                    @endif
                 </div>
             </div>
         </div>

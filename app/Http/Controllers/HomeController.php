@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data = session()->all();
+        $userId = $data['login_web_59ba36addc2b2f9401580f014c7f58ea4e30989d'];
+        
+        $u = new User();
+        $result = $u->getAllUsers($userId);
+        
+        $data = json_decode(json_encode($result[0]), true);        
+        
+        return view('home')->with($data);
     }
 }

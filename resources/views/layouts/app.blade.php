@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!--<meta name="csrf-token" content="{{ csrf_token() }}">-->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" ></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +19,28 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    
+<!---------- Min Oo ----------->
+<script type="text/javascript" src="/js/jquery/jquery-3.5.1.js"></script>	
+    
+<script src="/js/jquery-ui-1.12.1/jquery-ui.js"></script>	
+<link href="/js/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+
+<script src="/js/libs/jquery-dataTables-1.10.15.normal.js"></script> <!--need this-->
+<link rel="stylesheet" href="/css/jquery-dataTables-1.10.15.normal.css"> <!--need this-->
+
+<link rel="stylesheet" href="/css/jquery-confirm.min.css">
+<script src="/js/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
+    
+<link href="/css/select2.min.css" rel="stylesheet" />
+
+<script src="/js/jquery-select2/select2.min.js"></script>
+
+<script type="text/javascript" src="/js/users.js"></script>
+<link href="/css/users.css" rel="stylesheet" />    
+<!---------- Min Oo ----------->
+
 </head>
 <body>
     <div id="app">

@@ -1,0 +1,55 @@
+.button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;    
+    position: relative;
+}
+    
+.btn {
+    border: none;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.click {
+    background-color: #4CAF50;
+    color: white !important;
+} /* Green */
+.click:hover {
+    background-color: #46a049;
+    color: white !important;
+}
+
+/*Loading mask*/
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background-color: rgba(192,192,192,0.3);
+	background-image: url('/img/VSpinLoader.gif');
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+}
+body.loading {
+    overflow: hidden;   
+}
+
+body.loading .modal {
+    display: block;
+}
+/*Loading mask*/

@@ -23,5 +23,12 @@
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.26.11",
         "sass-loader": "^8.0.0"
+    },
+    "dependencies": {
+        "react-crud-table": "0.0.8",
+        "react-data-grid": "^7.0.0-canary.24",
+        "react-data-table-component": "^6.11.5",
+        "react-router-dom": "^5.2.0",
+        "styled-components": "^5.2.0"
     }
 }

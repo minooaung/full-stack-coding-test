@@ -18,3 +18,17 @@ Route::get('/', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginFo
 Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/users', [\App\Http\Controllers\UsersController::class, 'index'])->name('users');
+Route::get('/allusers', [\App\Http\Controllers\UsersController::class, 'getAllUsers'])->name('getAllUsers');
+
+Route::get('/getuser/{id}', [\App\Http\Controllers\UsersController::class, 'getUser'])->name('getUser');
+Route::post('/adduser', [\App\Http\Controllers\UsersController::class, 'addUser'])->name('addUser');
+Route::put('/updateuser/{id}', [\App\Http\Controllers\UsersController::class, 'updateUser'])->name('updateUser');
+Route::delete('/deleteuser/{id}', [\App\Http\Controllers\UsersController::class, 'deleteUser'])->name('deleteUser');
+
+
+
+
+
+
+
